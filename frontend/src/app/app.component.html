@@ -1,18 +1,22 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <img src="assets/images/tta-icon.png" width="50">
+      <img src="assets/images/tta-icon2.png" width="50">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Games</a>
-        <a class="nav-link" href="#">Players</a>
-        <a class="nav-link" href="#">Leaders</a>
-        <a class="nav-link">Wonders</a>
+        <a class="nav-link active" aria-current="page" routerLink="games">Games</a>
+        <a class="nav-link" routerLink="players">Players</a>
+        <a class="nav-link" routerLink="leaders">Leaders</a>
+        <a class="nav-link" routerLink="wonders">Wonders</a>
       </div>
     </div>
   </div>
 </nav>
+
+<div class="container mt-3">
+  <router-outlet></router-outlet>
+</div>

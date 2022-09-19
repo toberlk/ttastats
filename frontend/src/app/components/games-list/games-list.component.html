@@ -1,1 +1,45 @@
-<p>games-list works!</p>
+<!-- <button class="btn btn-primary">Add</button>
+<button class="btn btn-add-file">Add from file</button> -->
+
+<div class="container">
+    <div class="row justify-content-end">
+        <div class="col col-sm-auto"><button class="btn btn-primary">Add</button></div>
+        <div class="col col-sm-auto px-0"><button class="btn btn-secondary">Add many</button></div>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Author</th>
+        <th scope="col">Origin</th>
+        <th scope="col">Player #1</th>
+        <th scope="col"></th>
+        <th scope="col">Player #2</th>
+        <th scope="col"></th>
+        <th scope="col">Player #3</th>
+        <th scope="col"></th>
+        <th scope="col">Player #4</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let game of games">
+        <th scope="row">{{ game.id }}</th>
+        <td>{{ game.date }}</td>
+        <td>{{ game.author }}</td>
+        <td>{{ game.origin }}</td>
+        <td>{{ game.results[0].player }} </td>
+        <td>{{ game.results[0].score }}</td>
+        <td>{{ game.results[1].player }}</td>
+        <td>{{ game.results[1].score }}</td>
+        <td>-</td>
+        <td></td>
+        <td>-</td>
+        <td></td>
+      </tr>
+
+    </tbody>
+  </table>
