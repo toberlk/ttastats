@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="row justify-content-end">
-        <div class="col col-sm-auto"><button class="btn btn-primary">Add</button></div>
+        <div class="col col-sm-auto"><button class="btn btn-primary" routerLink="game">Add</button></div>
         <div class="col col-sm-auto px-0"><button class="btn btn-secondary">Add many</button></div>
     </div>
 </div>
@@ -27,14 +27,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let game of games">
-        <th scope="row">{{ game.id }}</th>
-        <td>{{ game.date }}</td>
+        <th scope="row">{{ game._id }}</th>
+        <td>{{ game.finishedOn | date:'YYYY-MM-dd' }}</td>
         <td>{{ game.author }}</td>
         <td>{{ game.origin }}</td>
-        <td>{{ game.results[0].player }} </td>
-        <td>{{ game.results[0].score }}</td>
-        <td>{{ game.results[1].player }}</td>
-        <td>{{ game.results[1].score }}</td>
+        <td>{{ game.presults[0].player }} </td>
+        <td>{{ game.presults[0].finalScore }}</td>
+        <td>{{ game.presults[1].player }}</td>
+        <td>{{ game.presults[1].finalScore }}</td>
         <td>-</td>
         <td></td>
         <td>-</td>

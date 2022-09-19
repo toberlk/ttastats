@@ -1,0 +1,21 @@
+<h4>New Game</h4>
+<form [formGroup]="form" (ngSubmit)="addGame()">
+    <h5 class="mt-4">Player #1</h5>
+    <div class="input-group mb-3">
+        <span class="input-group-text">Player #1</span>
+        <input type="text" class="form-control" formControlName="p1name" placeholder="Name" aria-label="Name">
+        <input type="number" class="form-control" formControlName="p1score" placeholder="Score" aria-label="Score">
+        <input type="number" class="form-control" formControlName="p1seat" placeholder="Seat" aria-label="Seat">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">P#1 Leaders</span>
+        <input type="text" class="form-control" formControlName="p1leaders" placeholder="... leaders" aria-label="Player 1 Leaders">
+        <span class="input-group-text" id="basic-addon1">P#1 Wonders</span>
+        <input type="text" class="form-control" formControlName="p1wonders" placeholder="... wonders" aria-label="Player 1 Wonders">
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary mb-3">
+            Add
+        </button>
+    </div>
+</form>

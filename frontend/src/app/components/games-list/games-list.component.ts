@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Game } from 'src/app/interfaces/game';
 
 @Component({
   selector: 'app-games-list',
@@ -12,59 +13,63 @@ export class GamesListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get games() {
+  get games(): Game[] {
     return [{
-      "id": 1,
+      "_id": "1",
+      "_created": new Date("2022-09-16T12:17"),
       "author": "lukaszt",
       "origin": "laohuang TPGL",
       "type": "2p",
-      "date": "2022-09-16",
-      "dateCretaed": "2022-09-16T12:17",
+      "finishedOn": new Date("2022-09-16"),
       "players": ["Oprah", "lukaszt"],
       "winner": "Oprah",
-      "results":	
+      "presults":	
         [
         { "player": "Oprah",
           "leaders": [ "Cleo", "Ziz", "Bach", "Mei" ],
           "wonders": [ "SH", "GW", "IRC" ] ,
-          "score": 231,
-          "position": 1,
-          "nscore": 1
+          "seat": 1,
+          "finalScore": 231,
+          "finalPosition": 1,
+          "normalizedScore": 1
         },
         { "player": "lukaszt",
           "leaders": [ "Sun", "Isa", "Cook", "Chu" ],
           "wonders": [ "HG", "TR" ] ,
-          "score": 159,
-          "position": 2,
-          "nscore": 0
+          "seat": 2,
+          "finalScore": 159,
+          "finalPosition": 2,
+          "normalizedScore": 0
         }
         ]
     
     },
     {
-      "id": 2,
+      "_id": "2",
+      "_created": new Date("2022-09-16T12:17"),
       "author": "lukaszt",
       "origin": "laohuang TPGL",
       "type": "2p",
-      "date": "2022-09-15",
-      "dateCretaed": "2022-09-16T12:17",
+      "finishedOn": new Date("2022-09-16"),
       "players": ["Neandrtalec", "lukaszt"],
       "winner": "Neandrtalec",
-      "results":	
+      "presults":	
         [
         { "player": "Neandrtalec",
           "leaders": [ "Ziz", "Dar", "Cou" ],
           "wonders": [ "LOA", "SC", "UN" ] ,
-          "score": 266,
-          "position": 1,
-          "nscore": 1
+          "seat": 1,
+          "finalScore": 266,
+          "finalPosition": 1,
+          "normalizedScore": 1
         },
         { "player": "lukaszt",
           "leaders": [ "Alex", "Nos", "Nob", "Die" ],
           "wonders": [ "CM", "HC" ] ,
-          "score": 111,
-          "position": 2,
-          "nscore": 0
+          "seat": 2,
+          "finalScore": 111,
+          "finalPosition": 2,
+          "normalizedScore": 0
         }
         ]
     
