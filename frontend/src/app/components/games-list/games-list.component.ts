@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/app/interfaces/game';
+import { GameLibStats } from 'src/app/interfaces/game-lib-stats';
 
 @Component({
   selector: 'app-games-list',
@@ -10,8 +11,19 @@ export class GamesListComponent implements OnInit {
 
   constructor() { }
 
+  gameLibStats: GameLibStats = {
+    lastUpdated: new Date(),
+    gamesTotal: 234,
+    gamesOf2p: 200,
+    gamesOf3p: 230,
+    gamesOf4p: 4,
+  };
+
   ngOnInit(): void {
+    
   }
+
+  
 
   get games(): Game[] {
     return [{
