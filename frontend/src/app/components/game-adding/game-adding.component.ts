@@ -87,17 +87,17 @@ export class GameAddingComponent implements OnInit {
       finalPosition: 3,
       leaders: this.controls.p3leaders.value.split(" "),
       wonders: this.controls.p3wonders.value.split(" "),
-      normalizedScore: this.calcNormalizedScore(gameType, 2)
+      normalizedScore: this.calcNormalizedScore(gameType, 3)
     }
 
     const p4Result: PlayerResult = {
-      player: this.controls.p2name.value,
-      seat: parseInt(this.controls.p2seat.value),
-      finalScore: parseInt(this.controls.p2score.value),
-      finalPosition: 2,
-      leaders: this.controls.p2leaders.value.split(" "),
-      wonders: this.controls.p2wonders.value.split(" "),
-      normalizedScore: this.calcNormalizedScore(gameType, 2)
+      player: this.controls.p4name.value,
+      seat: parseInt(this.controls.p4seat.value),
+      finalScore: parseInt(this.controls.p4score.value),
+      finalPosition: 4,
+      leaders: this.controls.p4leaders.value.split(" "),
+      wonders: this.controls.p4wonders.value.split(" "),
+      normalizedScore: this.calcNormalizedScore(gameType, 4)
     }
 
 
