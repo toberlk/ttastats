@@ -127,7 +127,7 @@ export class GameAddingComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.form.controls['gameType'].valueChanges.subscribe((value) =>{
+    this.form.controls['gameType'].valueChanges.subscribe((value) => {
       console.log(`game type changed to ${value}`)
       this.is4player = (value ==='4p');
       this.is3player = (value ==='4p' || value === '3p');
