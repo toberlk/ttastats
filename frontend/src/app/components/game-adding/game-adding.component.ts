@@ -43,17 +43,9 @@ export class GameAddingComponent implements OnInit {
 
   is4player = false;
 
-  gameType = 2;
-
-  getGameType() {
-    console.log('get game called')
-    return "2p";
-  }
-
   addGame() {
 
     let gameType = this.controls.gameType.value as GameType; //TODO to be calculated
-    const playerCount = 2;
 
     const winner = this.form.controls.p1name.value;
     const players = [
