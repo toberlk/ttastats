@@ -21,3 +21,5 @@ export interface PlayerResult {
     normalizedScore: number;
     
 }
+
+export type GameType = '2p' | '3p' | '4p';
