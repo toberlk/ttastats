@@ -13,10 +13,10 @@ export class GamesListComponent implements OnInit {
 
   gameLibStats: GameLibStats = {
     lastUpdated: new Date(),
-    gamesTotal: 234,
-    gamesOf2p: 200,
-    gamesOf3p: 230,
-    gamesOf4p: 4,
+    gamesTotal: 3,
+    gamesOf2p: 2,
+    gamesOf3p: 0,
+    gamesOf4p: 1,
   };
 
   ngOnInit(): void {
@@ -81,6 +81,52 @@ export class GamesListComponent implements OnInit {
           "seat": 2,
           "finalScore": 111,
           "finalPosition": 2,
+          "normalizedScore": 0
+        }
+        ]
+    
+    },
+    {
+      "_id": "3",
+      "_created": new Date("2021-11-24T12:17"),
+      "author": "lukaszt",
+      "origin": "Snail Cup",
+      "type": "4p",
+      "finishedOn": new Date("2021-11-24"),
+      "players": ["JeJejan", "khyung", "lukaszt", "Ioannis3"],
+      "winner": "lukaszt",
+      "presults":	
+        [
+        { "player": "JeJejan",
+          "leaders": [ "Ari", "Leo", "Gau", "Cou" ],
+          "wonders": [ "RR", "GW", "SOL" ] ,
+          "seat": 1,
+          "finalScore": 216,
+          "finalPosition": 2,
+          "normalizedScore": 0.5
+        },
+        { "player": "khyung",
+          "leaders": [ "Sun", "Mic", "Nap", "Gat" ],
+          "wonders": [ "HG", "TM", "LM", "HC" ] ,
+          "seat": 2,
+          "finalScore": 206,
+          "finalPosition": 3,
+          "normalizedScore": 0.16
+        },
+        { "player": "lukaszt",
+          "leaders": [ "Alex", "Joa", "The", "Die" ],
+          "wonders": [ "SH", "MP" ] ,
+          "seat": 3,
+          "finalScore": 227,
+          "finalPosition": 1,
+          "normalizedScore": 1
+        },
+        { "player": "Ioannis3",
+          "leaders": [ "Hip", "Nos", "Nob", "Chu" ],
+          "wonders": [ "P", "UC", "SF" ] ,
+          "seat": 4,
+          "finalScore": 147,
+          "finalPosition": 4,
           "normalizedScore": 0
         }
         ]
