@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import mongodb from 'mongodb'
+import GamesDAO from './dao/GamesDAO.js'
+import GamesController from './api/GamesController.js'
 
 dotenv.config();
 
@@ -12,7 +15,8 @@ app.use(cors());
 app.use(express.json());
 
 
-router.route('/').get((req, res) => res.send('hello'))
+router.route('/').get(GamesController.getGames)
+
 app.use('/api/v1/games', router);
 
 app.use('*', (req, res) => {
@@ -20,7 +24,17 @@ app.use('*', (req, res) => {
 });
 
 
+const client = new mongodb.MongoClient(process.env.TTASTATS_DB_URI);
+
+try {
+    await client.connect();
+    await GamesDAO.injectDB(client);
+    console.log(`mongo successfully connected`);
+} catch (e) {
+    console.error(e);
+    process.exit(1);
+}
+
 app.listen(port, () => {
     console.log(`tta stats backend is running on port: ${port}`);
     });
-
