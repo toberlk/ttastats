@@ -16,6 +16,7 @@ app.use(express.json());
 
 
 router.route('/').get(GamesController.getGames)
+router.route('/add').post(GamesController.addGame)
 
 app.use('/api/v1/games', router);
 
@@ -27,7 +28,7 @@ app.use('*', (req, res) => {
 const client = new mongodb.MongoClient(process.env.TTASTATS_DB_URI);
 
 try {
-    await client.connect();
+    await client.connect(); 
     await GamesDAO.injectDB(client);
     console.log(`mongo successfully connected`);
 } catch (e) {

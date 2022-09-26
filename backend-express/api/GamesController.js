@@ -20,4 +20,25 @@ export default class GamesController {
         res.json(response)
     }
 
+    static async addGame(req, res, next) {
+        console.log("GamesController:add game called")
+        try {
+            const gameJson = req.body;
+
+            const dateProps = {
+                created: new Date(),
+                finishedOn: req.body.finishedOn ? new Date(req.body.finishedOn) : null
+            }
+
+            const gameDoc = { ...gameJson, ...dateProps };
+
+            GamesDAO.addGameRecord(gameDoc);
+
+            res.json({ status: 'success' });
+        } catch (e) {
+            console.error(e);
+            res.status(500).json({ error: e. message });
+        }
+    }
+
 }

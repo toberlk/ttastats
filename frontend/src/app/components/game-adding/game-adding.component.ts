@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Game, PlayerResult, GameType } from 'src/app/interfaces/game';
+import { GamesService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-game-adding',
@@ -9,7 +10,7 @@ import { Game, PlayerResult, GameType } from 'src/app/interfaces/game';
 })
 export class GameAddingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _gameService: GamesService) { }
 
   controls = {
     gameType: new FormControl('2p', { nonNullable: true}),
@@ -49,8 +50,8 @@ export class GameAddingComponent implements OnInit {
 
     const winner = this.form.controls.p1name.value;
     const players = [
-      this.controls.p1name.value, this.controls.p2name!.value
-    ];
+      this.controls.p1name.value, this.controls.p2name!.value, this.controls.p3name!.value, this.controls.p4name!.value
+    ].filter((p) => p && p.length > 0);
 
     const p1Result: PlayerResult = {
       player: this.controls.p1name.value,
@@ -92,18 +93,24 @@ export class GameAddingComponent implements OnInit {
       normalizedScore: this.calcNormalizedScore(gameType, 4)
     }
 
+    const presults = [ p1Result, p2Result, p3Result, p4Result].filter((p)=>p.player && p.player.length >0);
+    const finishedOn = this.form.controls.finishedOn.value ? 
+      new Date(this.form.controls.finishedOn.value) : null;
 
-    const game: Game = {
-      _id: '',
-      _created: new Date(),
+    const game = {
+      created: new Date(),
       author: 'lukaszt', //TODO logged user
-      finishedOn: new Date(),
+      finishedOn: finishedOn,
       origin: this.form.controls.origin.value,
       type: gameType,
       players: players,
-      presults: [ p1Result, p2Result, p3Result, p4Result],
+      presults: presults,
       winner: winner
     }
+
+    const res = this._gameService.addGame(game);
+
+    res.subscribe((res)=>console.log("Add game call completed", res))
 
     console.log(game);
   }

@@ -1,0 +1,29 @@
+{
+    "created": { "$date": "2022-09-24T22:00:00.000Z" },
+    "author": "lukaszt",
+    "origin": "laohuang TPGL",
+    "type": "2p",
+    "finishedOn": { "$date": "2022-09-22" },
+    "players": ["ugglor", "lukaszt"],
+    "winner": "ugglor",
+    "presults":	
+      [
+      { "player": "ugglor",
+        "leaders": [ "Ash", "Joa", "Dar", "Mei" ],
+        "wonders": [ "RR", "FC", "MH" ] ,
+        "seat": 1,
+        "finalScore": 211,
+        "finalPosition": 1,
+        "normalizedScore": 1
+      },
+      { "player": "lukaszt",
+        "leaders": [ "Alex", "Gut", "Cat", "Chu" ],
+        "wonders": [ "AP", "ET", "I" ] ,
+        "seat": 2,
+        "finalScore": 204,
+        "finalPosition": 2,
+        "normalizedScore": 0
+      }
+      ]
+  
+  }

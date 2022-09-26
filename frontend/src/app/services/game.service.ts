@@ -14,6 +14,12 @@ export class GamesService {
     return this._http.get<Games>(
       `http://localhost:5000/api/v1/games`
     );
-}
+  }
+
+  addGame(game: any) { 
+    console.log('calling games add apis')
+    const res = this._http.post<any>(`http://localhost:5000/api/v1/games/add`, game);
+    return res;
+  }
 
 }

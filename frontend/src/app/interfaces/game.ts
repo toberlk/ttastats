@@ -1,6 +1,5 @@
 export interface Game {
-    _id: string;
-    _created: Date;
+    created: Date;
     author: string;
     origin: string;
     type: '2p' | '3p' | '4p';

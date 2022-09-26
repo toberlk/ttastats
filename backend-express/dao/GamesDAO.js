@@ -34,4 +34,13 @@ export default class GamesDAO {
 
     }
 
+    static async addGameRecord(gameDoc) {
+        try {
+            return await GamesDAO.gamesCollection.insertOne(gameDoc);
+        } catch (e) {
+            console.log(`Mongo:tta_stats:games unable to add game ${e}`);
+            return { error: e };
+        }
+    }
+
 }
