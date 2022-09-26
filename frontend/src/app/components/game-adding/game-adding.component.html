@@ -2,7 +2,7 @@
 
 
 <form [formGroup]="form" (ngSubmit)="addGame()">
-    <div class="input-group mb-1 mt-4">
+    <div class="input-group mb-4 mt-4">
         <span class="input-group-text">Game type:</span>
         <input type="radio" class="btn-check" name="gameType" formControlName="gameType" id="p2" value="2p" autocomplete="off">
         <label class="btn btn-outline-primary ms-1" for="p2">2p</label>
@@ -20,107 +20,37 @@
         <input type="text" class="form-control" formControlName="origin" placeholder="eg. World Champs 2022" aria-label="Origin">
     </div>
 
-    <div class="input-group mb-3 mt-4">
-        <span class="input-group-text">Player #1</span>
-        <div class="form-floating">
-            <input type="text" class="form-control" formControlName="p1name" id="p1name" placeholder="Name" aria-label="Name">
-            <label for="p1name">Player name</label>
-        </div>
-        <div class="form-floating">
-            <input type="number" class="form-control" formControlName="p1score" id="p1score" placeholder="Score" aria-label="Score">
-            <label for="p1seat">Score</label>
-        </div>
-        <div class="form-floating">
-            <input type="number" class="form-control" formControlName="p1seat" id="p1seat" placeholder="Seat" aria-label="Seat">
-            <label for="p1seat">Seat</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" formControlName="p1leaders" id="p1leaders" placeholder="Leaders" aria-label="Leaders">
-            <label for="p1leaders">Leaders</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" formControlName="p1wonders" id="p1wonders" placeholder="Wonders" aria-label="Wonders">
-            <label for="p1wonders">Wonders</label>
-        </div>
-    </div>
-
-    <div class="input-group mb-3">
-        <span class="input-group-text">Player #2</span>
-        <div class="form-floating">
-            <input type="text" class="form-control" formControlName="p2name" id="p2name" placeholder="Name" aria-label="Name">
-            <label for="p2name">Player name</label>
-        </div>
-        <div class="form-floating">
-            <input type="number" class="form-control" formControlName="p2score" id="p2score" placeholder="Score" aria-label="Score">
-            <label for="p2score">Score</label>
-        </div>
-        <div class="form-floating">
-            <input type="number" class="form-control" formControlName="p2seat" id="p2seat" placeholder="Seat" aria-label="Seat">
-            <label for="p2seat">Seat</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" formControlName="p2leaders" id="p2leaders" placeholder="Leaders" aria-label="Leaders">
-            <label for="p2leaders">Leaders</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" formControlName="p2wonders" id="p2wonders" placeholder="Wonders" aria-label="Wonders">
-            <label for="p2wonders">Wonders</label>
-        </div>
-    </div>
-
-    <ng-container *ngIf="is3player">
-        <div class="input-group mb-3">
-            <span class="input-group-text">Player #3</span>
-            <div class="form-floating">
-                <input type="text" class="form-control" formControlName="p3name" id="p3name" placeholder="Name" aria-label="Name">
-                <label for="p3name">Player name</label>
+    <ng-container formArrayName="players">
+        <ng-container *ngFor="let playerForm of players.controls; let i = index">
+            <div [formGroupName]="i">
+                <div class="input-group mt-2">
+                    <span class="input-group-text">Player #{{ i+1 }}</span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" formControlName="name" id="p{{i+1}}name" placeholder="Name" aria-label="Name">
+                        <label for="p{{i+1}}name">Player name</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="number" class="form-control" formControlName="score" id="p{{i+1}}score" placeholder="Score" aria-label="Score">
+                        <label for="p{{i+1}}score">Score</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="number" class="form-control" formControlName="seat" id="p{{i+1}}seat" placeholder="Seat" aria-label="Seat">
+                        <label for="p{{i+1}}seat">Seat</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" formControlName="leaders" id="p{{i+1}}leaders" placeholder="Leaders" aria-label="Leaders">
+                        <label for="p{{i+1}}leaders">Leaders</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" formControlName="wonders" id="p{{i+1}}wonders" placeholder="Wonders" aria-label="Wonders">
+                        <label for="p{{i+1}}wonders">Wonders</label>
+                    </div>
+                </div>
             </div>
-            <div class="form-floating">
-            <input type="number" class="form-control" formControlName="p3score" id="p3score" placeholder="Score" aria-label="Score">
-                <label for="p3scoreat">Score</label>
-            </div>
-            <div class="form-floating">
-                <input type="number" class="form-control" formControlName="p3seat" id="p3seat" placeholder="Seat" aria-label="Seat">
-                <label for="p3seat">Seat</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" class="form-control" formControlName="p3leaders" id="p3leaders" placeholder="Leaders" aria-label="Leaders">
-                <label for="p3leaders">Leaders</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" class="form-control" formControlName="p3wonders" id="p3wonders" placeholder="Wonders" aria-label="Wonders">
-                <label for="p3wonders">Wonders</label>
-            </div>
-        </div>
+        </ng-container>
     </ng-container>
 
-    <ng-container *ngIf="is4player"> 
-        <div class="input-group mb-3">
-            <span class="input-group-text">Player #4</span>
-            <div class="form-floating">
-                <input type="text" class="form-control" formControlName="p4name" id="p4name" placeholder="Name" aria-label="Name">
-                <label for="p4name">Player name</label>
-            </div>
-            <div class="form-floating">
-                <input type="number" class="form-control" formControlName="p4score" id="p4score" placeholder="Score" aria-label="Score">
-                <label for="p4seat">Score</label>
-            </div>
-            <div class="form-floating">
-                <input type="number" class="form-control" formControlName="p4seat" id="p4seat" placeholder="Seat" aria-label="Seat">
-                <label for="p4score">Seat</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" class="form-control" formControlName="p4leaders" id="p4leaders" placeholder="Leaders" aria-label="Leaders">
-                <label for="p4leaders">Leaders</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" class="form-control" formControlName="p4wonders" id="p4wonders" placeholder="Wonders" aria-label="Wonders">
-                <label for="p4wonders">Wonders</label>
-            </div>
-        </div>
-    </ng-container>
-
-    <div class="mb-3 d-flex justify-content-end gap-2">
+    <div class="mb-3 mt-3 d-flex justify-content-end gap-2">
         <button class="btn btn-secondary mb-3" routerLink="/">Cancel</button>
         <button type="submit" class="btn btn-primary mb-3">Add</button>
     </div>

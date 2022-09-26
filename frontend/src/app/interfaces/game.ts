@@ -4,9 +4,9 @@ export interface Game {
     origin: string;
     type: '2p' | '3p' | '4p';
     finishedOn: Date;
-    players: string[];
+    playerNames: string[];
     winner: string;
-    presults: PlayerResult[];
+    players: PlayerResult[];
 
 }
 

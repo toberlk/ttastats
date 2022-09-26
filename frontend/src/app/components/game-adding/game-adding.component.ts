@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Game, PlayerResult, GameType } from 'src/app/interfaces/game';
 import { GamesService } from 'src/app/services/game.service';
 
@@ -10,35 +10,44 @@ import { GamesService } from 'src/app/services/game.service';
 })
 export class GameAddingComponent implements OnInit {
 
-  constructor(private _gameService: GamesService) { }
+  constructor(private fb: FormBuilder, private _gameService: GamesService) { }
 
-  controls = {
-    gameType: new FormControl('2p', { nonNullable: true}),
-    finishedOn: new FormControl('', { nonNullable: true}),
-    origin: new FormControl('', { nonNullable: true}),
-    p1name: new FormControl('', { nonNullable: true}),
-    p1score: new FormControl('', { nonNullable: true}),
-    p1seat: new FormControl('', { nonNullable: true, }),
-    p1leaders: new FormControl('', { nonNullable: true}),
-    p1wonders: new FormControl('', { nonNullable: true}),
-    p2name: new FormControl('', { nonNullable: true}),
-    p2score: new FormControl('', { nonNullable: true}),
-    p2seat: new FormControl('', { nonNullable: true}),
-    p2leaders: new FormControl('', { nonNullable: true}),
-    p2wonders: new FormControl('', { nonNullable: true}),
-    p3name: new FormControl('', { nonNullable: true}),
-    p3score: new FormControl('', { nonNullable: true}),
-    p3seat: new FormControl('', { nonNullable: true}),
-    p3leaders: new FormControl('', { nonNullable: true}),
-    p3wonders: new FormControl('', { nonNullable: true}),
-    p4name: new FormControl('', { nonNullable: true}),
-    p4score: new FormControl('', { nonNullable: true}),
-    p4seat: new FormControl('', { nonNullable: true}),
-    p4leaders: new FormControl('', { nonNullable: true}),
-    p4wonders: new FormControl('', { nonNullable: true}),
+  form = this.fb.group({
+    gameType: ['2p', { nonNullable: true } ],
+    finishedOn: ['', { nonNullable: true } ],
+    origin: ['', { nonNullable: true } ],
+    players: this.fb.array([this.mkPlayerForm(), this.mkPlayerForm()])
+  });
+
+  get players() {
+    return this.form.controls["players"] as FormArray;
   }
 
-  form = new FormGroup(this.controls);
+  fillPlayers(gameType: string) {
+    const pCount = parseInt(gameType);
+    const currPlayers = this.players.length;
+
+    const playersToAdd = pCount - currPlayers;
+    for (let i=0;i<playersToAdd;i++) {
+      this.players.push(this.mkPlayerForm());
+    }
+
+    const playersToRemove = - playersToAdd;
+    for (let i=0;i<playersToRemove;i++) {
+      this.players.removeAt(-1);
+    }
+      
+  }
+
+  mkPlayerForm(): FormGroup {
+    return this.fb.group({
+      name: ['', { nonNullable: true}],
+      score: ['', { nonNullable: true}],
+      seat: ['', { nonNullable: true}],
+      leaders: ['', { nonNullable: true}],
+      wonders: ['', { nonNullable: true}],
+    })
+  }
 
   is3player = false;
 
@@ -46,66 +55,44 @@ export class GameAddingComponent implements OnInit {
 
   addGame() {
 
-    let gameType = this.controls.gameType.value as GameType; //TODO to be calculated
+    let gameType = this.form.controls.gameType.value as GameType; //TODO to be calculated
 
-    const winner = this.form.controls.p1name.value;
-    const players = [
-      this.controls.p1name.value, this.controls.p2name!.value, this.controls.p3name!.value, this.controls.p4name!.value
-    ].filter((p) => p && p.length > 0);
+    let pCount: number = parseInt(gameType);
 
-    const p1Result: PlayerResult = {
-      player: this.controls.p1name.value,
-      seat: parseInt(this.controls.p1seat.value),
-      finalScore: parseInt(this.controls.p1score.value),
-      finalPosition: 1,
-      leaders: this.controls.p1leaders.value.split(" "),
-      wonders: this.controls.p1wonders.value.split(" "),
-      normalizedScore: this.calcNormalizedScore(gameType, 1)
-    }
 
-    const p2Result: PlayerResult = {
-      player: this.controls.p2name.value,
-      seat: parseInt(this.controls.p2seat.value),
-      finalScore: parseInt(this.controls.p2score.value),
-      finalPosition: 2,
-      leaders: this.controls.p2leaders.value.split(" "),
-      wonders: this.controls.p2wonders.value.split(" "),
-      normalizedScore: this.calcNormalizedScore(gameType, 2)
-    }
+    //const finishedOn = this.form.controls.finishedOn.value ? new Date(this.form.controls.finishedOn.value) : null;
+    const finishedOn = this.form.controls.finishedOn.value;
 
-    const p3Result: PlayerResult = {
-      player: this.controls.p3name.value,
-      seat: parseInt(this.controls.p3seat.value),
-      finalScore: parseInt(this.controls.p3score.value),
-      finalPosition: 3,
-      leaders: this.controls.p3leaders.value.split(" "),
-      wonders: this.controls.p3wonders.value.split(" "),
-      normalizedScore: this.calcNormalizedScore(gameType, 3)
-    }
+    console.log(this.form.controls.players);
+    console.log(this.form.controls.players.controls[0].controls['name']);
 
-    const p4Result: PlayerResult = {
-      player: this.controls.p4name.value,
-      seat: parseInt(this.controls.p4seat.value),
-      finalScore: parseInt(this.controls.p4score.value),
-      finalPosition: 4,
-      leaders: this.controls.p4leaders.value.split(" "),
-      wonders: this.controls.p4wonders.value.split(" "),
-      normalizedScore: this.calcNormalizedScore(gameType, 4)
-    }
+    const players = this.form.controls.players.controls.map(pc => {
+      return {
+        player: pc.controls['name'].value,
+        seat: parseInt(pc.controls['seat'].value),
+        finalScore: parseInt(pc.controls['score'].value),
+        leaders: pc.controls['leaders'].value,
+        wonders: pc.controls['wonders'].value
+      };
+    }).sort((p1, p2) =>(p2.finalScore-p1.finalScore)*1000+(p2.seat-p1.seat))
+    .map((p, i) => { 
+      return { ...p, ...{
+          finalPosition: i + 1,
+          winner: i === 0,
+          normalizedScore: this.calcNormalizedScore(gameType, i + 1)
+        }
+      }
+    });
 
-    const presults = [ p1Result, p2Result, p3Result, p4Result].filter((p)=>p.player && p.player.length >0);
-    const finishedOn = this.form.controls.finishedOn.value ? 
-      new Date(this.form.controls.finishedOn.value) : null;
+    console.log("players", players)
 
     const game = {
-      created: new Date(),
       author: 'lukaszt', //TODO logged user
       finishedOn: finishedOn,
       origin: this.form.controls.origin.value,
       type: gameType,
       players: players,
-      presults: presults,
-      winner: winner
+      winner: players[0].player
     }
 
     const res = this._gameService.addGame(game);
@@ -130,9 +117,9 @@ export class GameAddingComponent implements OnInit {
       console.log(`game type changed to ${value}`)
       this.is4player = (value ==='4p');
       this.is3player = (value ==='4p' || value === '3p');
+      this.fillPlayers(value as string);
     });
 
-    //this.form.controls['gameType'].setValue('2p');
   }
 
 }
