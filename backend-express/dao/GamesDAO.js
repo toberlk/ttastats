@@ -23,6 +23,7 @@ export default class GamesDAO {
         try {
             const totalResults = await GamesDAO.gamesCollection.countDocuments(query)
             cursor = await GamesDAO.gamesCollection.find(query)
+                .sort({ created: -1 })
                 .limit(itemsPerPage)
                 .skip(itemsPerPage * page)
             const gamesList = await cursor.toArray()
