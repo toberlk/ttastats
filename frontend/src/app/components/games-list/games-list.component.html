@@ -26,32 +26,32 @@
     </thead>
     <tbody>
       <tr *ngFor="let game of games">
-        <td>{{ game.finishedOn | date:'YYYY-MM-dd' }}</td>
+        <td>{{ game.finishedOn || game.created | date:'YYYY-MM-dd' }}</td>
         <td>{{ game.author }}</td>
-        <td>{{ game.origin }}</td>
-        <td [ngClass]="{'winner': game.presults[0] && game.presults[0].finalPosition === 1}">
+        <td>{{ game.origin || '-' }}</td>
+        <td [ngClass]="{'winner': game.presults[0]?.finalPosition === 1}">
           {{ game.presults[0].player }}
         </td>
-        <td [ngClass]="{'winner': game.presults[0] && game.presults[0].finalPosition === 1}">
+        <td [ngClass]="{'winner': game.presults[0]?.finalPosition === 1}">
           {{ game.presults[0].finalScore }}
         </td>
-        <td [ngClass]="{'winner': game.presults[1] && game.presults[1].finalPosition === 1}">
+        <td [ngClass]="{'winner': game.presults[1]?.finalPosition === 1}">
           {{ game.presults[1].player }}
         </td>
-        <td [ngClass]="{'winner': game.presults[1] && game.presults[1].finalPosition === 1}">
+        <td [ngClass]="{'winner': game.presults[1]?.finalPosition === 1}">
           {{ game.presults[1].finalScore }}
         </td>
-        <td [ngClass]="{'winner': game.presults[2] && game.presults[2].finalPosition === 1}">
-          {{ game.presults[2] ? game.presults[2].player : '-' }}
+        <td [ngClass]="{'winner': game.presults[2]?.finalPosition === 1}">
+          {{ game.presults[2]?.player || '-' }}
         </td>
-        <td [ngClass]="{'winner': game.presults[2] && game.presults[2].finalPosition === 1}">
-          {{ game.presults[2] ? game.presults[2].finalScore : '' }}
+        <td [ngClass]="{'winner': game.presults[2]?.finalPosition === 1}">
+          {{ game.presults[2]?.finalScore || '' }}
         </td>
-        <td [ngClass]="{'winner': game.presults[3] && game.presults[3].finalPosition === 1}">
-          {{ game.presults[3] ? game.presults[3].player : '-' }}
+        <td [ngClass]="{'winner': game.presults[3]?.finalPosition === 1}">
+          {{ game.presults[3]?.player || '-' }}
         </td>
-        <td [ngClass]="{'winner': game.presults[3] && game.presults[3].finalPosition === 1}">
-          {{ game.presults[3] ? game.presults[3].finalScore : '' }}
+        <td [ngClass]="{'winner': game.presults[3]?.finalPosition === 1}">
+          {{ game.presults[3]?.finalScore || '' }}
         </td>
       </tr>
 
