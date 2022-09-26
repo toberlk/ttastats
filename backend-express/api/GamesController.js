@@ -25,6 +25,9 @@ export default class GamesController {
         try {
             const gameJson = req.body;
 
+            gameJson.presults.sort((a, b) => a.seat - b.seat)
+            gameJson.players = gameJson.presults.map((r) =>r.player)
+
             const dateProps = {
                 created: new Date(),
                 finishedOn: req.body.finishedOn ? new Date(req.body.finishedOn) : null
