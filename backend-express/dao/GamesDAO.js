@@ -44,4 +44,29 @@ export default class GamesDAO {
         }
     }
 
+    static async stats() {
+        try {
+            const pipeline = [
+                { $group: { _id: "$type", count: { $sum: 1 } } }
+            ];
+            const aggCursor = GamesDAO.gamesCollection.aggregate(pipeline);
+            const stats = await aggCursor.toArray();
+            return stats;
+        } catch (e) {
+            console.log(`Mongo:tta_stats:games - getting game count failed ${e}`);
+            return { error: e };
+        }
+    }
+
+    static async collectionLastUpdateDate() {
+        try {
+            const cursor = await GamesDAO.gamesCollection.find().limit(1).sort({created: -1});
+            const lu = await cursor.toArray();
+            return lu.length > 0 ? lu[0].created : null;
+        } catch (e)  {
+            console.log(`Mongo:tta_stats:games - getting last update date failed ${e}`);
+            return { error: e };
+        }
+    }
+
 }

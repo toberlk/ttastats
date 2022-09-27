@@ -17,6 +17,7 @@ app.use(express.json());
 
 router.route('/').get(GamesController.getGames)
 router.route('/add').post(GamesController.addGame)
+router.route('/stats').get(GamesController.stats)
 
 app.use('/api/v1/games', router);
 

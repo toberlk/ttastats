@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Game, PlayerResult, GameType } from 'src/app/interfaces/game';
 import { GamesService } from 'src/app/services/game.service';
+import { Toast } from 'bootstrap';
 
 @Component({
   selector: 'app-game-adding',
@@ -97,7 +98,13 @@ export class GameAddingComponent implements OnInit {
 
     const res = this._gameService.addGame(game);
 
-    res.subscribe((res)=>console.log("Add game call completed", res))
+    res.subscribe((res) => {
+      console.log("Add game call completed", res);
+
+      const toastLiveExample = document.getElementById('liveToast') as Element
+      const toast = new Toast(toastLiveExample)
+      toast.show()
+    })
 
     console.log(game);
   }

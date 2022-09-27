@@ -36,12 +36,30 @@ export default class GamesController {
 
             const gameDoc = { ...gameJson, ...dateProps };
 
-            GamesDAO.addGameRecord(gameDoc);
+            await GamesDAO.addGameRecord(gameDoc); // TODO await
 
             res.json({ status: 'success' });
         } catch (e) {
             console.error(e);
             res.status(500).json({ error: e. message });
+        }
+    }
+
+    static async stats(req, res, next) {
+        console.log("stats requested");
+        try {
+            const stats = { 'tot': 0, '2p': 0, '3p': 0, '4p': 0 };
+            const statsRes = await GamesDAO.stats();
+            statsRes.forEach(agg => stats[agg._id] = agg.count)
+            stats.tot = stats['2p']+stats['3p']+stats['4p'];
+
+            const lastUpdateDate = await GamesDAO.collectionLastUpdateDate()
+            stats.updated = lastUpdateDate;
+            res.json(stats);
+
+        } catch (e) {
+            console.error(e);
+            res.status(500).json({ 'tot': 0, '2p': 0, '3p': 0, '4p': 0 })
         }
     }
 

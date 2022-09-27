@@ -18,6 +18,7 @@ export interface PlayerResult {
     finalScore: number;
     finalPosition: 1 | 2 | 3 | 4;
     normalizedScore: number;
+    winner: boolean;
     
 }
 

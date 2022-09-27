@@ -21,6 +21,19 @@
         <label for="origin"></label>
     </div>
 
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto">Success!</strong>
+            <small>library updated</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            Game added successfully to the library!
+          </div>
+        </div>
+      </div>
+
     <ng-container formArrayName="players">
         <ng-container *ngFor="let playerForm of players.controls; let i = index">
             <div [formGroupName]="i">
