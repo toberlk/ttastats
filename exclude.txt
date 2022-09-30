@@ -1,0 +1,11 @@
+\frontend\node_modules\
+\fronted\dist\
+\backend-express\node_modules\
+\backend-express\dist\
+\backend-nest\node_modules\
+\backend-nest\dist\
+.png
+.jpg
+package-lock.json
+.angular
+.vscode
