@@ -11,8 +11,8 @@ import { Game } from './models/game.entity';
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      url: process.env.MONGODB_CONNECTION_STRING,
-      database: process.env.MONGODB_DATABASE,
+      url: process.env.TTASTATS_DB_URI,
+      database: process.env.TTASTATS_NS,
       entities: [ Game ],
       ssl: true,
       useUnifiedTopology: true,
